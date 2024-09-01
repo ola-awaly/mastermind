@@ -1,0 +1,33 @@
+services:
+   db:
+      image: mongo:latest
+      volumes:
+         - type: volume
+           source: mydb
+           target: /data/db
+
+      env_file:
+         - ./db/.env
+      ports:
+         - '27018:27017'
+
+   mastermindserver:
+      build:
+         context: .
+      ports:
+         - '10:80'
+      env_file:
+         - ./.env
+      volumes:
+         - type: bind
+           source: ./src
+           target: /mastermindserver/src
+         - type: volume
+           target: /mastermindserver/node_modules
+      depends_on:
+         - db
+      restart: always
+
+volumes:
+   mydb:
+      external: true

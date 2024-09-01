@@ -1,0 +1,10 @@
+services:
+   mastermind:
+      build:
+         context: .
+      ports:
+         - 3000:3000
+      volumes:
+         - .:/app:rw
+         - type: volume
+           target: /app/node_modules
