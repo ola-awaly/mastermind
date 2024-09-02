@@ -26,7 +26,7 @@ services:
       build:
          context: ./mastermindserver
       ports:
-         - '10:80'
+         - '10:8080'
       env_file:
          - ./mastermindserver/.env
       volumes:
@@ -38,7 +38,16 @@ services:
       depends_on:
          - db
       restart: always
-
+   reverse-proxy:
+      build:
+         context: ./reverse-proxy
+         dockerfile: Dockerfile.dev
+      ports:
+         - '80:80'
+      depends_on:
+         - db
+         - mastermindserver
+         - mastermindclient
 volumes:
    mydb:
       external: true

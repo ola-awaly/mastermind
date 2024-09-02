@@ -13,6 +13,16 @@ const Plateau = () => {
 	const [win, setWin] = useState(false);
 	const [tentatives, setTentatives] = useState([{ id: 1, actif: true }]);
 	useEffect(() => {
+		const callapi = async () => {
+			try {
+				const result = await fetch('/api/stats/66d4ab53bbad788595c46a20');
+				if (result.ok) console.log('call ok');
+				else console.log('call pas ok');
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		callapi();
 		if (win)
 			setTentatives((prev) => {
 				const updatedTentatives = [...prev]; // Crée une copie du tableau

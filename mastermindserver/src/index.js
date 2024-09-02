@@ -7,8 +7,8 @@ const app = express();
 let connexion = dbc.get();
 app.use(cookie());
 app.use(express.json());
-app.use('/users', require('./routers/users'));
-app.use('/stats', require('./routers/gameStats'));
+app.use('/api/users', require('./routers/users'));
+app.use('/api/stats', require('./routers/gameStats'));
 
 app.get('/err', (req, res) => {
 	process.exit(1);
@@ -23,4 +23,4 @@ app.get('/', (req, res) => {
 	// 	});
 });
 
-app.listen(80, console.log('serveur écoute sur le port 80'));
+app.listen(8080, console.log('serveur écoute sur le port 8080'));
