@@ -1,0 +1,44 @@
+services:
+   mastermindclient:
+      build:
+         context: ./mastermindclient
+         dockerfile: Dockerfile.dev
+      ports:
+         - 3000:3000
+      volumes:
+         - .:/app:rw
+         - type: volume
+           target: /app/node_modules
+
+   db:
+      image: mongo:latest
+      volumes:
+         - type: volume
+           source: mydb
+           target: /data/db
+
+      env_file:
+         - ./mastermindserver/db/.env
+      ports:
+         - '27018:27017'
+
+   mastermindserver:
+      build:
+         context: ./mastermindserver
+      ports:
+         - '10:80'
+      env_file:
+         - ./mastermindserver/.env
+      volumes:
+         - type: bind
+           source: ./mastermindserver/src
+           target: /mastermindserver/src
+         - type: volume
+           target: /mastermindserver/node_modules
+      depends_on:
+         - db
+      restart: always
+
+volumes:
+   mydb:
+      external: true
