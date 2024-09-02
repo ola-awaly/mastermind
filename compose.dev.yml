@@ -2,11 +2,11 @@ services:
    mastermindclient:
       build:
          context: ./mastermindclient
-         dockerfile: Dockerfile.dev
+         dockerfile: ./Dockerfile.dev
       ports:
          - 3000:3000
       volumes:
-         - .:/app:rw
+         - ./mastermindclient:/app:rw
          - type: volume
            target: /app/node_modules
 
