@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 EXPOSE 80
 ENV PATH=$PATH:/mastermindserver/node_modules/.bin
-CMD [ "nodemon","src/index.js" ]
+CMD [ "nodemon","--exitcrash","src/index.js" ]

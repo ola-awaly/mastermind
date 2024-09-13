@@ -15,6 +15,7 @@ module.exports = {
 
 	post: async (req, res) => {
 		let userInfo = req.body;
+		console.log(userInfo + 'inscription');
 
 		const saltRounds = 10;
 		userInfo.password = await bcrypt.hash(userInfo.password, saltRounds);
@@ -32,6 +33,7 @@ module.exports = {
 
 	login: async (req, res) => {
 		const loginInfo = req.body;
+		console.log(loginInfo);
 
 		const findedUser = await UserModel.findOne({
 			username: loginInfo.username,

@@ -1,15 +1,15 @@
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { createUser } from '../../apis/user';
 const Connexion = () => {
 	const navigate = useNavigate();
-	const { signin } = useContext(AuthContext);
+
 	const loginSchema = yup.object({
 		username: yup.string().required('Username obligatoire'),
 		password: yup.string().required('password obligatoire'),
+		name: yup.string(),
 	});
 	const defaultValues = {
 		username: '',
@@ -23,16 +23,17 @@ const Connexion = () => {
 		reset,
 		formState: { errors },
 	} = useForm({ defaultValues, resolver: yupResolver(loginSchema) });
-	const postLogin = async (values) => {
+	const inscrire = async (values) => {
 		console.log(values);
 		try {
 			clearErrors();
-			await signin({
+			await createUser({
 				username: values.username,
 				password: values.password,
+				name: values.name,
 			});
 			reset();
-			navigate('/mastermind');
+			navigate('/connexion');
 		} catch (error) {
 			console.log(error.message);
 			setError('general', { type: 'general', message: error.message });
@@ -40,10 +41,23 @@ const Connexion = () => {
 	};
 	return (
 		<form
-			onSubmit={handleSubmit(postLogin)}
+			onSubmit={handleSubmit(inscrire)}
 			className="shadow-2xl rounded p-4 bg-clouds-50 flex flex-col gap-2 text-sm"
 		>
-			<h1 className="text-xl text-center">Connexion</h1>
+			<h1 className="text-xl text-center">Inscription</h1>
+			<div>
+				<label htmlFor="" className="min-w-20 inline-block">
+					Name{' '}
+				</label>
+				<input
+					type="text"
+					id="name"
+					{...register('name')}
+					className={`min-w-36 p-2 rounded border${
+						errors.name ? 'outline-red-900  border-red-800' : ''
+					}`}
+				/>
+			</div>
 			<div>
 				<label htmlFor="" className="min-w-20 inline-block">
 					User{' '}
