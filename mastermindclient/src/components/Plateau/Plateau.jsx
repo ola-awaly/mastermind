@@ -31,13 +31,13 @@ const Plateau = () => {
 			});
 	}, [win]);
 	return (
-		<div className="flex flex-col items-center gap-2 min-h-screen justify-end mb-3 bg-clouds">
-			<h1 className="text-3xl text-blue-600 p-3">MastermindOla</h1>
+		<div className="flex flex-col items-center gap-2  justify-center mb-3 bg-clouds mt-2 flex-auto">
+			{/* <h1 className="text-3xl text-blue-600 p-3">MastermindOla</h1>
 			<p className="text-justify w-1/2 text-slate-500 text-xs font-thin">
 				Tu as 8 tentatives pour trouver la bonne combinaison de boules,
 				clique sur une boule pour changer sa couleur. Quand tu as fini
 				clique sur check
-			</p>
+			</p> */}
 			{(tentatives.length > 8 || win) && (
 				<div className="border shadow bg-slate-200 p-2 rounded">
 					{win && (
@@ -54,7 +54,7 @@ const Plateau = () => {
 					</div>
 				</div>
 			)}
-			<ul className=" flex-auto flex  justify-start flex-col-reverse shadow-2xl bg-white rounded">
+			<ul className=" flex-auto flex  justify-start flex-col-reverse shadow-2xl  rounded">
 				{tentatives.map(
 					(el) =>
 						el.id < 9 && (
