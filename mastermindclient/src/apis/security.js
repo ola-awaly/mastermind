@@ -17,3 +17,9 @@ export const logout = async () => {
 		method: 'delete',
 	});
 };
+
+export const getCurrentUser = async () => {
+	const response = await fetch('/api/users/current');
+	if (response.ok) return response.json();
+	else return null;
+};

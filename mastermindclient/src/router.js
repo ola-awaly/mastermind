@@ -3,10 +3,12 @@ import App from './App';
 import Connexion from './pages/Connexion/Connexion';
 import Inscription from './pages/Inscription/Inscription';
 import Plateau from './components/Plateau/Plateau';
+import { appLoader } from './loaders/appLoader';
 export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
+		loader: appLoader,
 		errorElement: 'error element',
 		children: [
 			{

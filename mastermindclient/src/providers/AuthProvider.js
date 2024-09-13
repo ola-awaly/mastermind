@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { login, logout } from '../apis/security';
-
+import { useLoaderData } from 'react-router';
 const AuthProvider = ({ children }) => {
-	const [currentUser, setCurrentUser] = useState(null);
+	const user = useLoaderData();
+	const [currentUser, setCurrentUser] = useState(user);
 	const signin = async (credentials) => {
 		let res = await login(credentials);
 		if (res) setCurrentUser(res);
