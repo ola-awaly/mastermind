@@ -7,12 +7,16 @@ export const login = async (credentials) => {
 		body: JSON.stringify(credentials),
 	});
 	let res = await response.json();
-	if (response.ok) return res;
+	if (response.ok) {
+		localStorage.setItem('userid', res._id);
+		return res;
+	}
 	//else console.log(response);
 	else throw new Error(res.message);
 };
 
 export const logout = async () => {
+	localStorage.removeItem('userid');
 	await fetch('/api/users/logout', {
 		method: 'delete',
 	});
@@ -20,6 +24,9 @@ export const logout = async () => {
 
 export const getCurrentUser = async () => {
 	const response = await fetch('/api/users/current');
-	if (response.ok) return response.json();
-	else return null;
+	if (response.ok) {
+		let user = await response.json();
+		localStorage.setItem('userid', user._id);
+		return user;
+	} else return null;
 };

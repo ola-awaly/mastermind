@@ -1,6 +1,7 @@
 import Ligne from '../Ligne/Ligne';
 import { useState, useEffect } from 'react';
 import PropSol from './PropSol';
+import { setStats } from '../../apis/gameStats';
 const Tentative = ({
 	sol,
 	setwin,
@@ -49,10 +50,14 @@ const Tentative = ({
 		}
 	};
 	useEffect(() => {
+		const setRecord = async (nbreTentatives) => {
+			await setStats({ tentatives: nbreTentatives, name: 'mastermind' });
+		};
 		if (pionsVerts.length >= 3) {
 			setwin(true);
+			setRecord(tentatives.length);
 		}
-	}, [pionsVerts.length, setwin, active]);
+	}, [pionsVerts.length, setwin, active, tentatives.length]);
 
 	return active ? (
 		<li className="relative flex gap-2 border p-2 border-blue-800 rounded bg-blue-200 items-center justify-end shadow-2xl">

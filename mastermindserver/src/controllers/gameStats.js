@@ -5,7 +5,7 @@ module.exports = {
 		const userid = req.params.userid;
 		const user = await gameStatsModel.findOne({ userid: userid });
 		if (user) res.status(200).json(user);
-		else res.status(200).json(null);
+		else res.status(200).json({});
 	},
 	setStatsByUser: async (req, res) => {
 		const userid = req.params.userid;
@@ -21,12 +21,12 @@ module.exports = {
 			// Si les stats existe pour ce jeu, mettre à jour si tentatives est plus grand que l'existant
 
 			if (statExistant) {
-				if (statExistant.tentatives < tentatives) {
+				if (statExistant.tentatives > tentatives) {
 					newStat = await gameStatsModel.findOneAndUpdate(
 						{ name: name, userid: userid }, // Condition de recherche
 						{
 							played: new Date(),
-							$max: { tentatives: tentatives },
+							$min: { tentatives: tentatives },
 						},
 						{
 							new: true, // Retourne le document mis à jour

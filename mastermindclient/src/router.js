@@ -4,6 +4,7 @@ import Connexion from './pages/Connexion/Connexion';
 import Inscription from './pages/Inscription/Inscription';
 import Plateau from './components/Plateau/Plateau';
 import { appLoader } from './loaders/appLoader';
+import { mastermindLoader } from './loaders/mastermindLoader';
 export const router = createBrowserRouter([
 	{
 		path: '/',
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: 'inscription',
+				errorElement: 'error element',
 				element: <Inscription />,
 			},
 			{
@@ -25,6 +27,8 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: 'mastermind',
+				loader: mastermindLoader,
+				errorElement: 'error element',
 				element: <Plateau />,
 			},
 		],

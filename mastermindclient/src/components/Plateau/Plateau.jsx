@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import Boule from '../Boule/Boule';
 import Tentative from '../Tentative/Tentative';
-
+import { useLoaderData } from 'react-router';
 const Plateau = () => {
+	const stats = useLoaderData();
 	const sol = [
 		{ couleur: 'bg-green-800', pos: 1 },
 		{ couleur: 'bg-blue-800', pos: 2 },
@@ -13,16 +14,18 @@ const Plateau = () => {
 	const [win, setWin] = useState(false);
 	const [tentatives, setTentatives] = useState([{ id: 1, actif: true }]);
 	useEffect(() => {
-		const callapi = async () => {
-			try {
-				const result = await fetch('/api/stats/66d4ab53bbad788595c46a20');
-				if (result.ok) console.log('call ok');
-				else console.log('call pas ok');
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		callapi();
+		console.warn(stats);
+
+		// const callapi = async () => {
+		// 	try {
+		// 		const result = await fetch('/api/stats/66d4ab53bbad788595c46a20');
+		// 		if (result.ok) console.log('call ok');
+		// 		else console.log('call pas ok');
+		// 	} catch (error) {
+		// 		console.log(error);
+		// 	}
+		// };
+		// callapi();
 		if (win)
 			setTentatives((prev) => {
 				const updatedTentatives = [...prev]; // Crée une copie du tableau
@@ -38,6 +41,11 @@ const Plateau = () => {
 				clique sur une boule pour changer sa couleur. Quand tu as fini
 				clique sur check
 			</p> */}
+			{stats && stats.tentatives && (
+				<p className="border border-slate-700 shadow text-sm rounded p-2 text-slate-800">
+					Record : {stats.tentatives} tentatives
+				</p>
+			)}
 			{(tentatives.length > 8 || win) && (
 				<div className="border shadow bg-slate-200 p-2 rounded">
 					{win && (
