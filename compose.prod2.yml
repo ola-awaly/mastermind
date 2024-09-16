@@ -38,8 +38,8 @@ services:
            source: mydb
            target: /data/db
       environment:
-         - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-         - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+         - MONGO_INITDB_ROOT_USERNAME=init
+         - MONGO_INITDB_ROOT_PASSWORD=init
    reverse-proxy:
       image: ghcr.io/ola-awaly/mastermind/reverse-proxy:latest
       ports:
