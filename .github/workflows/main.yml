@@ -35,13 +35,13 @@ jobs:
            id: metadata
            uses: docker/metadata-action@v5
            with:
-              image: ${{ matrix.full_image_name }}
+              image: ${{ matrix.full-image-name }}
 
          - name: build et push
            uses: docker/build-push-action@v5
            with:
               push: true
-              tags: ${{ matrix.full_image_name }}:latest
+              tags: ${{ matrix.full-image-name }}:latest
               context: ./${{matrix.path}}
               file: ./${{matrix.path}}/Dockerfile.prod
               cache-from: type=gha
