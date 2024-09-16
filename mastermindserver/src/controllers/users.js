@@ -45,6 +45,8 @@ module.exports = {
 			);
 
 			if (ok) {
+				console.log(key);
+
 				let token = jwt.sign({}, key, {
 					subject: findedUser._id.toString(),
 					expiresIn: 3600 * 24 * 30 * 6,
