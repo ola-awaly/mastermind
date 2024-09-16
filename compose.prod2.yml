@@ -16,9 +16,11 @@ services:
       environment:
          - DB_USERNAME=${DB_USERNAME}
          - DB_PASSWORD=${DB_PASSWORD}
-         - NODE_ENV=${NODE_ENV}
+         - MODE_ENV=prod
          - DB_PROD=${DB_PROD}
          - DB_DEV=${DB_DEV}
+         - jwtprivatekey=${jwtprivatekey}
+         - jwtpublickey=${jwtpublickey}
       deploy:
          #  replicas: 3
          #  update_config:
