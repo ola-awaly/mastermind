@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
    mastermindclient:
       image: ghcr.io/ola-awaly/mastermind/mastermindclient:latest
@@ -10,13 +8,7 @@ services:
          - NODE_ENV=prod
          - DB_PROD=mastermind_prod
          - DB_DEV=mastermind_dev
-      deploy:
-         replicas: 3
-         update_config:
-            parallelism: 1
-            delay: 10s
-         restart_policy:
-            condition: on-failure
+
       pull_policy: always
 
    mastermindserver:
@@ -28,10 +20,10 @@ services:
          - DB_PROD=${DB_PROD}
          - DB_DEV=${DB_DEV}
       deploy:
-         replicas: 3
-         update_config:
-            parallelism: 1
-            delay: 10s
+         #  replicas: 3
+         #  update_config:
+         #     parallelism: 1
+         #     delay: 10s
          restart_policy:
             condition: on-failure
       pull_policy: always
