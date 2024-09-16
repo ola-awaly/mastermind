@@ -63,7 +63,7 @@ jobs:
               ssh-add - <<< "${{ secrets.OVH_PROD_PKEY}}"
               mkdir -p  ~/.ssh
               ssh-keyscan -H ${{ env.SERVER_IP }} >> ~/.ssh/known_hosts
-              scp compose.prod2.yml ${{ env.SERVER_USER }}@${{ env.SERVER_IP }}:/root/compose.prod2.yml
+              scp compose.prod2.yml ${{ env.SERVER_USER }}@${{ env.SERVER_IP }}:/home/${{ env.SERVER_USER }}/compose.prod2.yml
               ssh ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "
               export DB_USERNAME=${{ secrets.DB_USERNAME }} 
               export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
@@ -74,4 +74,4 @@ jobs:
               export MONGO_INITDB_ROOT_PASSWORD=${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
               docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} &&
               docker volume create mydb &&
-              docker compose -f /root/compose.prod2.yml up -d --force-recreate"
+              docker compose -f /home/${{ env.SERVER_USER }}/compose.prod2.yml up -d --force-recreate"
