@@ -75,5 +75,7 @@ jobs:
               export MONGO_INITDB_ROOT_USERNAME=${{secrets.MONGO_INITDB_ROOT_USERNAME}}
               export MONGO_INITDB_ROOT_PASSWORD=${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
               docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} &&
+              docker volume rm mydb &&
               docker volume create mydb &&
+              bash -c 'env && mongod' &&
               docker compose -f /home/${{ env.SERVER_USER }}/compose.prod2.yml up -d --force-recreate"
