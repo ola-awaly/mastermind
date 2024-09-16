@@ -1,0 +1,47 @@
+services:
+   mastermindclient:
+      build:
+         context: ./mastermindclient
+         dockerfile: Dockerfile.prod
+      restart: unless-stopped
+      depends_on:
+         - mastermindserver
+         - db
+   mastermindserver:
+      build:
+         context: ./mastermindserver
+         dockerfile: Dockerfile.prod
+      environment:
+         - DB_USERNAME=ola1
+         - DB_PASSWORD=ola
+         - NODE_ENV=prod
+         - DB_PROD=mastermind_prod
+         - DB_DEV=mastermind_dev
+
+      restart: unless-stopped
+      depends_on:
+         - db
+   db:
+      image: mongo
+      env_file: ./mastermindserver/db/.env
+      volumes:
+         - type: volume
+           source: mydb
+           target: /data/db
+      environment:
+         - MONGO_INITDB_ROOT_USERNAME
+         - MONGO_INITDB_ROOT_PASSWORD
+   reverse-proxy:
+      build:
+         context: ./reverse-proxy
+         dockerfile: Dockerfile.prod
+      ports:
+         - 80:80
+      restart: unless-stopped
+      depends_on:
+         - mastermindserver
+         - db
+         - mastermindclient
+volumes:
+   mydb:
+      external: true

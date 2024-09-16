@@ -14,8 +14,6 @@ const Plateau = () => {
 	const [win, setWin] = useState(false);
 	const [tentatives, setTentatives] = useState([{ id: 1, actif: true }]);
 	useEffect(() => {
-		console.warn(stats);
-
 		// const callapi = async () => {
 		// 	try {
 		// 		const result = await fetch('/api/stats/66d4ab53bbad788595c46a20');
