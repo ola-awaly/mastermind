@@ -39,7 +39,7 @@ jobs:
            id: metadata
            uses: docker/metadata-action@v5
            with:
-              image: ${{ matrix.full-image-name }}
+              images: ${{ matrix.full-image-name }}
 
          - name: build et push
            uses: docker/build-push-action@v5
