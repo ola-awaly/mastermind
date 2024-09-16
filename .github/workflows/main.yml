@@ -3,6 +3,10 @@ on:
    push:
       branches:
          - main
+env:
+   SERVER_IP: 15.235.198.17
+   SERVER_USER: ubuntu
+
 jobs:
    build:
       runs-on: ubuntu-latest
@@ -46,3 +50,28 @@ jobs:
               file: ./${{matrix.path}}/Dockerfile.prod
               cache-from: type=gha
               cache-to: type=gha,mode=max
+   deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+         - name: checkout le code
+           uses: actions/checkout@v4
+
+         - name: déployer sur le vps
+           run: |
+              eval $(ssh-agent -s)
+              ssh-add - <<< "${{ secrets.OVH_PROD_PKEY}}"
+              mkdir -p  ~/.ssh
+              ssh-keyscan -H ${{ env.SERVER_IP }} >> ~/.ssh/known_hosts
+              scp docker-compose.prod2.yml ${{ env.SERVER_USER }}@${{ env.SERVER_IP }}:/root/docker-compose.prod2.yml
+              ssh ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "
+              export DB_USERNAME=${{ secrets.DB_USERNAME }} 
+              export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+              export NODE_ENV=${{ secrets.NODE_ENV }}
+              export DB_PROD=${{ secrets.DB_PROD }}
+              export DB_DEV=${{ secrets.DB_DEV }}
+              export MONGO_INITDB_ROOT_USERNAME=${{secrets.MONGO_INITDB_ROOT_USERNAME}}
+              export MONGO_INITDB_ROOT_PASSWORD=${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
+              docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} &&
+              docker volume create mydb &&
+              docker compose -f /root/docker-compose.prod2.yml up -d --force-recreate"

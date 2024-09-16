@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+   mastermindclient:
+      image: ghcr.io/ola-awaly/mastermind/mastermindclient:latest
+
+      environment:
+         - DB_USERNAME=ola1
+         - DB_PASSWORD=ola
+         - NODE_ENV=prod
+         - DB_PROD=mastermind_prod
+         - DB_DEV=mastermind_dev
+      deploy:
+         replicas: 3
+         update_config:
+            parallelism: 1
+            delay: 10s
+         restart_policy:
+            condition: on-failure
+      pull_policy: always
+
+   mastermindserver:
+      image: ghcr.io/ola-awaly/mastermind/mastermindserver:latest
+      environment:
+         - DB_USERNAME=${DB_USERNAME}
+         - DB_PASSWORD=${DB_PASSWORD}
+         - NODE_ENV=${NODE_ENV}
+         - DB_PROD=${DB_PROD}
+         - DB_DEV=${DB_DEV}
+      deploy:
+         replicas: 3
+         update_config:
+            parallelism: 1
+            delay: 10s
+         restart_policy:
+            condition: on-failure
+      pull_policy: always
+      restart: always
+   db:
+      image: mongo
+
+      volumes:
+         - type: volume
+           source: mydb
+           target: /data/db
+      environment:
+         - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+         - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+   reverse-proxy:
+      image: ghcr.io/ola-awaly/mastermind/reverse-proxy:latest
+      ports:
+         - 80:80
+      restart: unless-stopped
+      depends_on:
+         - mastermindserver
+         - db
+         - mastermindclient
+volumes:
+   mydb:
