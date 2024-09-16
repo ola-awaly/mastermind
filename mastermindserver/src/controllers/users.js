@@ -45,7 +45,7 @@ module.exports = {
 			);
 
 			if (ok) {
-				console.log(key);
+				console.log({ key: key });
 
 				let token = jwt.sign({}, key, {
 					subject: findedUser._id.toString(),

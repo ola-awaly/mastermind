@@ -14,7 +14,7 @@ services:
       environment:
          - DB_USERNAME=ola1
          - DB_PASSWORD=ola
-         - NODE_ENV=prod
+         - MODE_ENV=prod
          - DB_PROD=mastermind_prod
          - DB_DEV=mastermind_dev
 
