@@ -70,8 +70,8 @@ jobs:
               export MODE_ENV=${{ secrets.MODE_ENV }}
               export DB_PROD=${{ secrets.DB_PROD }}
               export DB_DEV=${{ secrets.DB_DEV }}
-              export JWTPRIVATEKEY=${{secrets.JWTPRIVATEKEY}}
-              export JWTPUBLICKEY=${{secrets.JWTPUBLICKEY}}
+              export JWTPRIVATEKEY=$(echo "${{secrets.JWTPRIVATEKEYBASE64}} | base64 -d)
+              export JWTPUBLICKEY=$(echo "${{secrets.JWTPUBLICKEYBASE64}} | base64 -d)
               export MONGO_INITDB_ROOT_USERNAME=${{secrets.MONGO_INITDB_ROOT_USERNAME}}
               export MONGO_INITDB_ROOT_PASSWORD=${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
               docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} &&
