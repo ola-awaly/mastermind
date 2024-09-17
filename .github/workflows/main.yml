@@ -67,11 +67,11 @@ jobs:
               ssh ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "
               export DB_USERNAME=${{ secrets.DB_USERNAME }} 
               export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-              export NODE_ENV=${{ secrets.NODE_ENV }}
+              export MODE_ENV=${{ secrets.MODE_ENV }}
               export DB_PROD=${{ secrets.DB_PROD }}
               export DB_DEV=${{ secrets.DB_DEV }}
-              export jwtprivatekey=${{secrets.jwtprivatekey}}
-              export jwtpublickey=${{secrets.jwtpublickey}}
+              export JWTPRIVATEKEY=${{secrets.JWTPRIVATEKEY}}
+              export JWTPUBLICKEY=${{secrets.JWTPUBLICKEY}}
               export MONGO_INITDB_ROOT_USERNAME=${{secrets.MONGO_INITDB_ROOT_USERNAME}}
               export MONGO_INITDB_ROOT_PASSWORD=${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
               docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} &&

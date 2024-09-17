@@ -19,8 +19,8 @@ services:
          - MODE_ENV=prod
          - DB_PROD=${DB_PROD}
          - DB_DEV=${DB_DEV}
-         - jwtprivatekey=${jwtprivatekey}
-         - jwtpublickey=${jwtpublickey}
+         - JWTPRIVATEKEY=${JWTPRIVATEKEY}
+         - JWTPUBLICKEY=${JWTPUBLICKEY}
       deploy:
          #  replicas: 3
          #  update_config:
