@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import ChoixCouleurs from '../ChoixCouleurs/ChoixCouleurs';
 
@@ -17,6 +18,7 @@ const Boule = ({ setProp, pos, couleurInitial = 'slate', actif }) => {
 	return (
 		<div className="relative">
 			<div
+				data-testid="boule"
 				className={` p-4 size-8 rounded-full m-1  bg-gradient-to-b from-${couleur}-500 to-${couleur}-800 shadow-md transform hover:scale-105 hover:shadow-lg transition duration-300 ease-in-out`}
 				onClick={handleClick}
 			></div>

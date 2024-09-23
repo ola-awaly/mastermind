@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext } from 'react';
@@ -45,7 +46,7 @@ const Connexion = () => {
 		>
 			<h1 className="text-xl text-center">Connexion</h1>
 			<div>
-				<label htmlFor="" className="min-w-20 inline-block">
+				<label htmlFor="username" className="min-w-20 inline-block">
 					User{' '}
 				</label>
 				<input
@@ -58,7 +59,7 @@ const Connexion = () => {
 				/>
 			</div>
 			<div>
-				<label htmlFor="" className="min-w-20 inline-block">
+				<label htmlFor="password" className="min-w-20 inline-block">
 					Password{' '}
 				</label>
 				<input

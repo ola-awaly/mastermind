@@ -1,35 +1,32 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import Boule from '../Boule/Boule';
 import Tentative from '../Tentative/Tentative';
 import { useLoaderData } from 'react-router';
-const Plateau = () => {
-	const stats = useLoaderData();
-	const sol = [
+const Plateau = ({
+	sol = [
 		{ couleur: 'bg-green-800', pos: 1 },
 		{ couleur: 'bg-blue-800', pos: 2 },
 		{ couleur: 'bg-red-800', pos: 3 },
 		{ couleur: 'bg-yellow-800', pos: 4 },
-	];
+	],
+}) => {
+	const stats = useLoaderData();
 
 	const [win, setWin] = useState(false);
 	const [tentatives, setTentatives] = useState([{ id: 1, actif: true }]);
+	console.log(win, tentatives);
+
 	useEffect(() => {
-		// const callapi = async () => {
-		// 	try {
-		// 		const result = await fetch('/api/stats/66d4ab53bbad788595c46a20');
-		// 		if (result.ok) console.log('call ok');
-		// 		else console.log('call pas ok');
-		// 	} catch (error) {
-		// 		console.log(error);
-		// 	}
-		// };
-		// callapi();
-		if (win)
+		if (win) {
+			console.log(win);
+
 			setTentatives((prev) => {
 				const updatedTentatives = [...prev]; // Crée une copie du tableau
 				updatedTentatives.pop(); // Retire le dernier élément
 				return updatedTentatives; // Retourne le tableau mis à jour
 			});
+		}
 	}, [win]);
 	return (
 		<div className="flex flex-col items-center gap-2  justify-center mb-3 bg-clouds mt-2 flex-auto">

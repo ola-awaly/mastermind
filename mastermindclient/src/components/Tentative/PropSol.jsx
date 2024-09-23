@@ -1,6 +1,7 @@
+import React from 'react';
 const PropSol = ({ pionsBlancs, pionsOranges, pionsVerts }) => {
 	return (
-		<div className="flex">
+		<div className="flex" data-testid="tentative-sol">
 			{pionsVerts &&
 				pionsVerts.map((e, index) => (
 					<div

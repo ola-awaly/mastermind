@@ -1,3 +1,4 @@
+import React from 'react';
 import Boule from '../Boule/Boule';
 
 const Ligne = ({ setProp, actif }) => {

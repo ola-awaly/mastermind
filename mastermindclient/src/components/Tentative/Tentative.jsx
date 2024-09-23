@@ -1,3 +1,4 @@
+import React from 'react';
 import Ligne from '../Ligne/Ligne';
 import { useState, useEffect } from 'react';
 import PropSol from './PropSol';
@@ -50,6 +51,8 @@ const Tentative = ({
 		}
 	};
 	useEffect(() => {
+		console.log(active);
+
 		const setRecord = async (nbreTentatives) => {
 			await setStats({ tentatives: nbreTentatives, name: 'mastermind' });
 		};
