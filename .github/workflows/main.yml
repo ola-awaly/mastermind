@@ -8,6 +8,24 @@ env:
    SERVER_USER: ubuntu
 
 jobs:
+   test_mastermindClient:
+      runs-on: ubuntu-latest
+      defaults:
+         run:
+            working-directory: mastermindclient
+      steps:
+         - name: checkout code
+           uses: actions/checkout@v4
+         - name: installer Node.js
+           uses: actions/setup-node@v3
+           with:
+              cache: 'npm'
+              cache-dependency-path: mastermindclient/package-lock.json
+         - name: installer les dépendances
+           run: npm ci --prefer-offline
+         - name: exécute les tests
+           run: npm run test
+
    build:
       runs-on: ubuntu-latest
       permissions:
