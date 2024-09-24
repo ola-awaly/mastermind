@@ -5,7 +5,7 @@ import Header from './Header';
 import { MemoryRouter } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
-import logo from '../../assets/images/logo.png';
+//import logo from '../../assets/images/logo.png';
 test('should mock image import', () => {
 	expect(logo).toBe('test-file-stub');
 });
