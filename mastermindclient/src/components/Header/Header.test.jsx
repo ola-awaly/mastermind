@@ -9,7 +9,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 // test('should mock image import', () => {
 // 	expect(logo).toBe('test-file-stub');
 // });
-describe.skip('header', () => {
+describe('header', () => {
 	it('should display the logo', () => {
 		const mockContextValue = {
 			currentUser: { name: 'Test User' },

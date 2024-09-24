@@ -18,7 +18,7 @@ jest.mock('../ChoixCouleurs/ChoixCouleurs', () => (props) => (
 ));
 //setProp, pos, couleurInitial = 'slate', actif
 
-describe.skip('A boule', () => {
+describe('A boule', () => {
 	describe('in a default environment', () => {
 		// beforeEach(() => {
 		// 	useStateMock

@@ -13,7 +13,7 @@ import Tentative from './Tentative';
 // 	tentatives,
 // })
 
-describe.skip('Tentative', () => {
+describe('Tentative', () => {
 	beforeEach(() => {
 		const tentatives = [
 			{ id: 1, actif: false },

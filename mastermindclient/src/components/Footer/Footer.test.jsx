@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 import Footer from './Footer';
 
-test.skip('footer should exist', () => {
+test('footer should exist', () => {
 	render(<Footer />);
 	const footer = screen.getByText(/awaly/i);
 

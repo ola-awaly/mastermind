@@ -16,7 +16,7 @@ jest.mock('../Boule/Boule', () => () => <div>Boule</div>);
 jest.mock('../Tentative/Tentative', () => () => <div>Tentative</div>);
 beforeEach(() => {});
 
-describe.skip('Mastermind', () => {
+describe('Mastermind', () => {
 	it('should display statistics of the user', () => {
 		const setWin = jest.fn();
 		const setTentatives = jest.fn();

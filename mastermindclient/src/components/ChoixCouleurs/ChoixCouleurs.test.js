@@ -1,6 +1,6 @@
 import React from 'react';
 //import { useState as useStateMock } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ChoixCouleurs from './ChoixCouleurs';
 
@@ -14,7 +14,7 @@ import ChoixCouleurs from './ChoixCouleurs';
 // 			)
 // 		);
 
-describe.skip('ChoixCouleur', () => {
+describe('ChoixCouleur', () => {
 	it('should render the right color when selected', () => {
 		const setChoix = jest.fn();
 		const setChoixbool = jest.fn();
