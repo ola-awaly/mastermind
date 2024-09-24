@@ -24,7 +24,7 @@ jobs:
          - name: installer les dépendances
            run: npm ci --prefer-offline
          - name: check folders
-           run: ls
+           run: ls /home/runner/work/mastermind/mastermind/mastermindclient/
          - name: afficher l'arborescence des dossiers
            run: ls -R
          - name: exécute les tests
