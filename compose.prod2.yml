@@ -58,5 +58,5 @@ services:
 volumes:
    mydb:
 networks:
-   mastermind:
+   proxy_mastermind:
       external: true
