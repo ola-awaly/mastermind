@@ -10,6 +10,8 @@ services:
          - DB_DEV=mastermind_dev
 
       pull_policy: always
+      networks:
+         - mastermind
 
    mastermindserver:
       image: ghcr.io/ola-awaly/mastermind/mastermindserver:latest
@@ -30,6 +32,8 @@ services:
             condition: on-failure
       pull_policy: always
       restart: always
+      networks:
+         - mastermind
    db:
       image: mongo
 
@@ -40,14 +44,19 @@ services:
       environment:
          - MONGO_INITDB_ROOT_USERNAME=init
          - MONGO_INITDB_ROOT_PASSWORD=init
-   reverse-proxy:
-      image: ghcr.io/ola-awaly/mastermind/reverse-proxy:latest
-      ports:
-         - 80:80
-      restart: unless-stopped
-      depends_on:
-         - mastermindserver
-         - db
-         - mastermindclient
+      networks:
+         - mastermind
+   # reverse-proxy:
+   #    image: ghcr.io/ola-awaly/mastermind/reverse-proxy:latest
+   #    ports:
+   #       - 80:80
+   #    restart: unless-stopped
+   #    depends_on:
+   #       - mastermindserver
+   #       - db
+   #       - mastermindclient
 volumes:
    mydb:
+networks:
+   mastermind:
+      external: true

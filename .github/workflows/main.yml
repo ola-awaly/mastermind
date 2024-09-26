@@ -42,8 +42,7 @@ jobs:
                  full-image-name: ghcr.io/${{ github.repository }}/mastermindclient
                - path: 'mastermindserver'
                  full-image-name: ghcr.io/${{ github.repository }}/mastermindserver
-               - path: 'reverse-proxy'
-                 full-image-name: ghcr.io/${{ github.repository }}/reverse-proxy
+
       steps:
          - name: checkout code
            uses: actions/checkout@v4
