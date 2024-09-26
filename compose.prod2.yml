@@ -11,7 +11,7 @@ services:
 
       pull_policy: always
       networks:
-         - mastermind
+         - proxy_mastermind
 
    mastermindserver:
       image: ghcr.io/ola-awaly/mastermind/mastermindserver:latest
@@ -33,7 +33,7 @@ services:
       pull_policy: always
       restart: always
       networks:
-         - mastermind
+         - proxy_mastermind
    db:
       image: mongo
 
@@ -45,7 +45,7 @@ services:
          - MONGO_INITDB_ROOT_USERNAME=init
          - MONGO_INITDB_ROOT_PASSWORD=init
       networks:
-         - mastermind
+         - proxy_mastermind
    # reverse-proxy:
    #    image: ghcr.io/ola-awaly/mastermind/reverse-proxy:latest
    #    ports:
