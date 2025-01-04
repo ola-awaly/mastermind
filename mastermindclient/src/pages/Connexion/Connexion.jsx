@@ -77,7 +77,7 @@ const Connexion = () => {
 				</p>
 			)}
 			<button className="hover:opacity-90 text-slate-100 p-2 rounded transition-all bg-clouds-900 hover:scale-105">
-				Submit
+				Submitt
 			</button>
 		</form>
 	);
